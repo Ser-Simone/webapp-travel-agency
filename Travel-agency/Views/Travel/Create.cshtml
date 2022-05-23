@@ -1,0 +1,45 @@
+﻿@model Destinations
+
+<h1>Create</h1>
+
+<h4>Destination</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="title" class="control-label"> Destinazione: </label>
+                <input asp-for="title" class="form-control" />
+                <span asp-validation-for="title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="price" class="control-label">Costo del viaggio:</label>
+                <input asp-for="price" class="form-control" />
+                <span asp-validation-for="price" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                    Imagine: 
+                    <input asp-for="image" class="d-block w-100" />
+                    <span asp-validation-for="image" class="text-danger"></span>
+                </div>
+
+            <div class="form-group">
+                <label asp-for="description" class="control-label"> Descrizione: </label>
+                <input asp-for="description" class="form-control" />
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group mt-5">
+                <input type="submit" value="Aggiungi" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
