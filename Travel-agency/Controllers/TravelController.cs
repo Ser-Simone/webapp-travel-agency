@@ -63,5 +63,84 @@ namespace Travel_agency.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Destinations editTravel = null;
+
+            using (TravelContext db = new TravelContext())
+            {
+                editTravel = db.destinationSet
+                     .Where(travel => travel.Id == id)
+                     .FirstOrDefault();
+
+            }
+
+            if (editTravel == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return View("Edit", editTravel);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, Destinations destinations )
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("edit", destinations);
+            }
+            Destinations editTravel = null;
+
+            using (TravelContext db = new TravelContext())
+            {
+                editTravel = db.destinationSet
+                    .Where(travel => travel.Id == id)
+                    .FirstOrDefault();
+
+                if (editTravel != null)
+                {
+                    editTravel.title = destinations.title;
+                    editTravel.description = destinations.description;
+                    editTravel.image = destinations.image;
+                    editTravel.price = destinations.price;
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            using(TravelContext db = new TravelContext())
+            {
+                Destinations deleteTravel = db.destinationSet
+                    .Where(travel => travel.Id == id)
+                    .FirstOrDefault();
+
+                if (deleteTravel != null)
+                {
+                    db.destinationSet.Remove(deleteTravel);
+                    db.SaveChanges();
+
+                   return RedirectToAction("Index");
+                }else
+                {
+                    return NotFound();
+                }
+            }
+        }
     }
 }
