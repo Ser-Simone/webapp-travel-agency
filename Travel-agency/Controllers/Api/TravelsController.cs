@@ -10,13 +10,22 @@ namespace Travel_agency.Controllers.Api
     public class TravelsController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get(string search)
+        public IActionResult Get(string? search)
         {
             List<Destinations> destinations = new List<Destinations>();
 
             using (TravelContext db = new TravelContext())
             {
-                destinations = db.destinationSet.ToList<Destinations>();
+
+                if (search != null && search != "")
+                {
+                    destinations = db.destinationSet.Where(destinations => destinations.title
+                    .Contains(search) || destinations.description.Contains(search)).ToList<Destinations>();
+                }
+                else
+                {
+                    destinations = db.destinationSet.ToList<Destinations>();
+                }
             }
             return Ok(destinations);
         }

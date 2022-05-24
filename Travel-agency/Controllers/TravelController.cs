@@ -16,6 +16,16 @@ namespace Travel_agency.Controllers
             }
             return View("HomePage", traveList);
         }
+        [HttpGet]
+        public IActionResult User()
+        {
+            List<Destinations> traveList;
+            using (TravelContext db = new TravelContext())
+            {
+                traveList = db.destinationSet.ToList<Destinations>();
+            }
+            return View("User", traveList);
+        }
 
         [HttpGet]
         public IActionResult Details(int id)
@@ -36,8 +46,7 @@ namespace Travel_agency.Controllers
                 {
                     return BadRequest();
                 }
-            }
-           
+            }    
         }
 
         [HttpGet]

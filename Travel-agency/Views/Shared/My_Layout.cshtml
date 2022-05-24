@@ -10,6 +10,7 @@
   </head>
 
   <!--********************************* NAV BAR INTESTAZIONE ***********************************************************************-->
+   <body>
   <headear>
       <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
   <a class="navbar-brand">Dream Travel</a>
@@ -20,7 +21,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="@Url.Action("Index","Home")">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="@Url.Action("Index","Travel")">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="@Url.Action("Create", "Travel")">Aggiungi Viaggio</a>
@@ -37,12 +38,12 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link" href="@Url.Action("User", "Travel")">Utente</a>
       </li>
     </ul>
     <div class="">
     <form class="form-inline my-2 my-lg-0 ">
-      <input class="form-control mr-sm-2 me-lg-5" type="search" placeholder="Search" aria-label="Search">
+      <input id="search_input" class="form-control mr-sm-2 me-lg-5" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     </div>
@@ -50,12 +51,15 @@
 </nav>
   </headear>
     <!--************************************************************** FINE NAVBAR  ***********************************************************************-->
-
-
-  <body>
+   
+         
+    <main>
     @RenderBody();
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-  </body>
+  </main>
 
 
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    @RenderSection("Scripts", required: false)
+   </body>
 </html>

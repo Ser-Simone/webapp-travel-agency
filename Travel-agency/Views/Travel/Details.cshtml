@@ -1,1 +1,19 @@
 ﻿@model Destinations
+
+<div class="container">
+        <div class="row me-5 text-center justify-content-center">
+            <div class="col-3">
+                <div class="card shadow mb-5" style="max-width: 18rem;">
+                    <img src="@Model.image" class="card-img-top" alt="SEA">
+                    <div class="card-header text-white bg-warning mb-3 fw-bold text-center">@Model.title</div>
+                    <div class="card-body">
+                      <p class="card-text">@Model.description</p>
+                    </div>
+                    <div class="card-footer bg-white text-center">
+                        <p class="text-center text-warning bg-white fw-normal">@Model.title</p>
+                        <span class="fw-bold">€ @Model.price</span><span class="text-muted">/person</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
