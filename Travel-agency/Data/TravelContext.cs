@@ -6,7 +6,7 @@ namespace Travel_agency.Data
 {
     public class TravelContext : DbContext
     {
-        public DbSet<Destinations> destinationSet { get; set; }
+        public DbSet<Destinations>? destinationSet { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

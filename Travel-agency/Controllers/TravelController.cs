@@ -14,7 +14,7 @@ namespace Travel_agency.Controllers
             {
                 traveList = db.destinationSet.ToList<Destinations>();
             }
-            return View("HomePage");
+            return View("HomePage", traveList);
         }
 
         [HttpGet]
@@ -48,7 +48,7 @@ namespace Travel_agency.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create (Destinations newTravel)
+        public IActionResult Create (Destinations? newTravel)
         {
             if(!ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace Travel_agency.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return View("edit", destinations);
+                return View("Edit", destinations);
             }
             Destinations editTravel = null;
 
@@ -126,7 +126,7 @@ namespace Travel_agency.Controllers
         {
             using(TravelContext db = new TravelContext())
             {
-                Destinations deleteTravel = db.destinationSet
+                Destinations? deleteTravel = db.destinationSet
                     .Where(travel => travel.Id == id)
                     .FirstOrDefault();
 

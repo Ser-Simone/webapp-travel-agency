@@ -1,3 +1,82 @@
 ﻿@{
     Layout = "My_Layout";
 }
+
+
+<div class="container">
+       <div id="travel-wait" class="row js_wait_post text-center">
+        <div class="col-12">
+           
+        </div>
+    </div>
+    <div id="no-travel-div" class="row js_no_post text-center d-none">
+        <div class="col-12">
+            <h3>Non è presente nessun viaggio</h3>
+        </div>
+    </div>
+    <div id="travel-div" class="row js_travel_cards d-none">
+        <!-- qui verranno mostrati gli elementi -->
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        document.getElementById("search_input").addEventListener('keyup', searchItems);
+
+        searchItems();
+
+        function searchItems(){
+            var inputText = document.getElementById('search_input').value;
+            loadPosts(inputText);
+        }
+
+        function loadPosts(searchParameter){
+            document.getElementById('travel-div').innerHTML = '';
+
+            axios.get('/api/Posts/Get', {
+                params : {
+                    search : searchParameter
+                }
+            }).then((result) => {
+                // Codice che verrà eseguito quando arrivano i dati dalla mia web api
+                console.log("Ho ricevuto i miei post, evviva!");
+
+                if(result.data.length == 0){
+                    document.getElementById('post-wait').classList.add('d-none');
+                    document.getElementById('no-post-div').classList.remove('d-none');
+                } else {
+                    document.getElementById('no-post-div').classList.add('d-none');
+                    document.getElementById('post-wait').classList.add('d-none');
+                    document.getElementById('post-div').classList.remove('d-none');
+
+                    result.data.forEach(post => {
+                        document.getElementById('post-div').innerHTML += 
+                            `
+                            <div class="col-12 col-md-4 p-2">
+                               <div class="card post">
+                                  <img src="${post.image}" class="card-img-top" alt="${post.description}">
+                                  <div class="card-body">
+                                    <h5 class="card-title">${post.title}</h5>
+                                    <p class="card-text">${post.description}</p>
+                                  </div>
+                                </div>
+                            </div>
+                            `
+                    });
+                }
+
+            }
+
+            ).catch((error) => {
+                console.log("C'è stato un errore: " + error);
+            });
+        }
+    
+    </script>
+
+    
+
+}
